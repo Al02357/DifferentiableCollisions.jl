@@ -22,6 +22,7 @@ function skew(ω::Vector{T}) where {T}
             ω[3] 0 -ω[1];
             -ω[2] ω[1] 0]
 end
+# 动力学
 function dynamics(params::NamedTuple,x,u,k_iter)
     # quadrotor dynamics with an MRP for attitude
     r = x[1:3]
@@ -65,6 +66,7 @@ function dynamics(params::NamedTuple,x,u,k_iter)
     ]
 end
 
+# 离散动力学， 四阶龙格库塔
 function discrete_dynamics(p::NamedTuple,x,u,k)
     k1 = p.dt*dynamics(p,x,        u, k)
     k2 = p.dt*dynamics(p,x + k1/2, u, k)
@@ -73,6 +75,7 @@ function discrete_dynamics(p::NamedTuple,x,u,k)
     x + (1/6)*(k1 + 2*k2 + 2*k3 + k4)
 end
 
+# Ques
 function ineq_con_u(p,u)
     [u-p.u_max;-u + p.u_min]
 end
