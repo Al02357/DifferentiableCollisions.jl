@@ -16,7 +16,7 @@ import Random
 using JLD2
 include(joinpath(@__DIR__,"simple_altro.jl"))
 
-
+# 混淆矩阵
 function skew(ω::Vector{T}) where {T}
     return [0 -ω[3] ω[2];
             ω[3] 0 -ω[1];
